@@ -5,3 +5,7 @@
 
 // Use the math library provided by the tutorial
 #cmakedefine USE_MYMATH
+
+// Does the platform provide the log and exp functions?
+#cmakedefine HAVE_LOG
+#cmakedefine HAVE_EXP
