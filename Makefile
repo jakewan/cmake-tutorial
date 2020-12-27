@@ -43,6 +43,9 @@ install-step-4-with-my-math:
 		--install . \
 		--prefix "$(INSTALL_ROOT)/step-4-with-my-math"
 
+test-step-4-with-my-math:
+	cd build/step-4-with-my-math && ctest -N
+
 build-step-4-without-my-math:
 	@mkdir -p build/step-4-without-my-math
 	@rm -rf build/step-4-without-my-math/*
@@ -55,3 +58,6 @@ install-step-4-without-my-math:
 	cd build/step-4-without-my-math && cmake \
 		--install . \
 		--prefix "$(INSTALL_ROOT)/step-4-without-my-math"
+
+test-step-4-without-my-math:
+	cd build/step-4-without-my-math && ctest -N
