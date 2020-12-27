@@ -1,3 +1,5 @@
+INSTALL_ROOT=$(shell pwd)/install
+
 build-step-1:
 	@mkdir -p build/step-1
 	@rm -rf build/step-1/*
@@ -33,11 +35,23 @@ build-step-4-with-my-math:
 	@rm -rf build/step-4-with-my-math/*
 	cd build/step-4-with-my-math && cmake ../../Step4
 	cd build/step-4-with-my-math && cmake --build .
-	cd build/step-4-with-my-math && cmake --install .
+
+install-step-4-with-my-math:
+	mkdir -p install/step-4-with-my-math
+	rm -rf install/step-4-with-my-math/*
+	cd build/step-4-with-my-math && cmake \
+		--install . \
+		--prefix "$(INSTALL_ROOT)/step-4-with-my-math"
 
 build-step-4-without-my-math:
 	@mkdir -p build/step-4-without-my-math
 	@rm -rf build/step-4-without-my-math/*
 	cd build/step-4-without-my-math && cmake ../../Step4 -DUSE_MYMATH=OFF
 	cd build/step-4-without-my-math && cmake --build .
-	cd build/step-4-without-my-math && cmake --install .
+
+install-step-4-without-my-math:
+	mkdir -p install/step-4-without-my-math
+	rm -rf install/step-4-without-my-math/*
+	cd build/step-4-without-my-math && cmake \
+		--install . \
+		--prefix "$(INSTALL_ROOT)/step-4-without-my-math"
