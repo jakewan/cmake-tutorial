@@ -74,3 +74,16 @@ install-step-5-with-my-math:
 	cd build/step-5-with-my-math && cmake \
 		--install . \
 		--prefix "$(INSTALL_ROOT)/step-5-with-my-math"
+
+build-step-6-with-my-math:
+	@mkdir -p build/step-6-with-my-math
+	@rm -rf build/step-6-with-my-math/*
+	cd build/step-6-with-my-math && cmake ../../Step6
+	cd build/step-6-with-my-math && cmake --build .
+
+install-step-6-with-my-math:
+	mkdir -p install/step-6-with-my-math
+	rm -rf install/step-6-with-my-math/*
+	cd build/step-6-with-my-math && cmake \
+		--install . \
+		--prefix "$(INSTALL_ROOT)/step-6-with-my-math"
