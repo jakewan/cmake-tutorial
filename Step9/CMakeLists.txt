@@ -3,9 +3,17 @@ cmake_minimum_required(VERSION 3.10)
 # Set the project name
 project(Tutorial VERSION 1.0)
 
-# Specify C++ standard
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+# Construct an INTERFACE target and specify the C++ standard level.
+add_library(tutorial_compiler_flags INTERFACE)
+target_compile_features(tutorial_compiler_flags cxx_std_11)
+
+set(gcc_like_cxx "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU>")
+set(msvc_cxx "$<COMPILE_LANG_AND_ID:CXX,MSVC>")
+target_compile_options(
+    tutorial_compiler_flags INTERFACE
+    "$<${gcc_like_cxx}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused>>"
+    "$<${msvc_cxx}:$<BUILD_INTERFACE:-W3>>"
+    )
 
 # Control where the static and shared libraries are built so that
 # on Windows, we don't need to tinker with the path to run the
