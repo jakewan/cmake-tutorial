@@ -118,3 +118,6 @@ step-9-install-with-my-math: step-9-build-with-my-math
 	cd build/step-9-with-my-math && cmake \
 		--install . \
 		--prefix "$(INSTALL_ROOT)/step-9-with-my-math"
+
+step-9-execute: step-9-install-with-my-math
+	DYLD_LIBRARY_PATH="$(shell pwd)/install/step-9-with-my-math/lib" install/step-9-with-my-math/bin/Tutorial $(arg1)
