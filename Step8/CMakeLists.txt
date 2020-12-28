@@ -35,7 +35,8 @@ install(FILES "${PROJECT_BINARY_DIR}/TutorialConfig.h"
     DESTINATION include
     )
 
-enable_testing()
+# Enable dashboard scripting
+include(CTest)
 
 # Does the application run?
 add_test(NAME Runs COMMAND Tutorial 25)

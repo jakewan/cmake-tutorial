@@ -96,3 +96,12 @@ step-7-build-with-my-math:
 
 step-7-create-binary-distribution: step-7-build-with-my-math
 	cd build/step-7-with-my-math && cpack -G ZIP
+
+step-8-build-with-my-math:
+	@mkdir -p build/step-8-with-my-math
+	@rm -rf build/step-8-with-my-math/*
+	cd build/step-8-with-my-math && cmake ../../Step8
+	cd build/step-8-with-my-math && cmake --build .
+
+step-8-test-and-submit: step-8-build-with-my-math
+	cd build/step-8-with-my-math && ctest -D Experimental
