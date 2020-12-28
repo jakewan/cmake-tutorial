@@ -87,3 +87,12 @@ install-step-6-with-my-math:
 	cd build/step-6-with-my-math && cmake \
 		--install . \
 		--prefix "$(INSTALL_ROOT)/step-6-with-my-math"
+
+step-7-build-with-my-math:
+	@mkdir -p build/step-7-with-my-math
+	@rm -rf build/step-7-with-my-math/*
+	cd build/step-7-with-my-math && cmake ../../Step7
+	cd build/step-7-with-my-math && cmake --build .
+
+step-7-create-binary-distribution: step-7-build-with-my-math
+	cd build/step-7-with-my-math && cpack -G ZIP
