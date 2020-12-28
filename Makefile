@@ -105,3 +105,16 @@ step-8-build-with-my-math:
 
 step-8-test-and-submit: step-8-build-with-my-math
 	cd build/step-8-with-my-math && ctest -D Experimental
+
+step-9-build-with-my-math:
+	@mkdir -p build/step-9-with-my-math
+	@rm -rf build/step-9-with-my-math/*
+	cd build/step-9-with-my-math && cmake ../../Step9
+	cd build/step-9-with-my-math && cmake --build .
+
+step-9-install-with-my-math: step-9-build-with-my-math
+	@mkdir -p install/step-9-with-my-math
+	@rm -rf install/step-9-with-my-math/*
+	cd build/step-9-with-my-math && cmake \
+		--install . \
+		--prefix "$(INSTALL_ROOT)/step-9-with-my-math"

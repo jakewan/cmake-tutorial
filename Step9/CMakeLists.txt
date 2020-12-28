@@ -7,22 +7,24 @@ project(Tutorial VERSION 1.0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-option(USE_MYMATH "Use math implementation provided by the tutorial" ON)
+# Control where the static and shared libraries are built so that
+# on Windows, we don't need to tinker with the path to run the
+# executable.
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}")
+
+option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
 # Configure a header to pass the version to the source code
 configure_file(TutorialConfig.h.in TutorialConfig.h)
 
-if(USE_MYMATH)
-    # Add the MathFunctions library
-    add_subdirectory(MathFunctions)
-    list(APPEND EXTRA_LIBS MathFunctions)
-endif()
+# Add the MathFunctions library
+add_subdirectory(MathFunctions)
 
 # Add the executable
 add_executable(Tutorial tutorial.cxx)
-
-# Link the executable and the MathFunctions library
-target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})
+target_link_libraries(Tutorial PUBLIC MathFunctions)
 
 # Ensure configured files written into the binary tree can be found
 target_include_directories(
