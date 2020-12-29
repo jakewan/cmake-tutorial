@@ -127,3 +127,11 @@ step-10-build-with-my-math:
 	@rm -rf build/step-10-with-my-math/*
 	cd build/step-10-with-my-math && cmake ../../Step10
 	cd build/step-10-with-my-math && cmake --build .
+
+step-11-run-cmake:
+	@mkdir -p build/step-11-with-my-math
+	@rm -rf build/step-11-with-my-math/*
+	cd build/step-11-with-my-math && cmake ../../Step11
+
+step-11-build: step-11-run-cmake
+	cd build/step-11-with-my-math && cmake --build .
