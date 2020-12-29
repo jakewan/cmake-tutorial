@@ -28,6 +28,12 @@ if(USE_MYMATH)
       MakeTable.cxx
       )
 
+  target_link_libraries(
+      MakeTable
+      PRIVATE
+      tutorial_compiler_flags
+      )
+
   # Add the command to generate the source code.
   add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Table.h
@@ -57,12 +63,24 @@ if(USE_MYMATH)
       )
 
   target_link_libraries(
+      SqrtLibrary
+      PUBLIC
+      tutorial_compiler_flags
+      )
+
+  target_link_libraries(
       MathFunctions
       PRIVATE
       SqrtLibrary
       )
 
 endif()
+
+target_link_libraries(
+    MathFunctions
+    PUBLIC
+    tutorial_compiler_flags
+    )
 
 # Define the symbol stating we are using the declspec(dllexport) when
 # building on Windows
@@ -73,7 +91,7 @@ target_compile_definitions(
     )
 
 # Install rules
-set(installable_libs MathFunctions)
+set(installable_libs MathFunctions tutorial_compiler_flags)
 if(TARGET SqrtLibrary)
   list(APPEND installable_libs SqrtLibrary)
 endif()
