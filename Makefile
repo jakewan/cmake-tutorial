@@ -135,3 +135,20 @@ step-11-run-cmake:
 
 step-11-build: step-11-run-cmake
 	cd build/step-11-with-my-math && cmake --build .
+
+step-12-build-debug:
+	@mkdir -p build/step-12-with-my-math/debug
+	@rm -rf build/step-12-with-my-math/debug/*
+	cd build/step-12-with-my-math/debug && cmake -DCMAKE_BUILD_TYPE=Debug ../../../Step12
+	cd build/step-12-with-my-math/debug && cmake --build .
+
+step-12-build-release:
+	@mkdir -p build/step-12-with-my-math/release
+	@rm -rf build/step-12-with-my-math/release/*
+	cd build/step-12-with-my-math/release && cmake -DCMAKE_BUILD_TYPE=Release ../../../Step12
+	cd build/step-12-with-my-math/release && cmake --build .
+
+step-12-build-all: step-12-build-debug step-12-build-release
+
+step-12-run-cpack:
+	cd build/step-12-with-my-math && cpack --config ../../Step12/MultiCPackConfig.cmake

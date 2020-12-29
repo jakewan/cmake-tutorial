@@ -92,6 +92,20 @@ target_compile_definitions(
     "EXPORTING_MYMATH"
     )
 
+# Set the version number for the MathFunctions library
+set_property(
+    TARGET
+    MathFunctions
+    PROPERTY
+    VERSION "1.0.0"
+    )
+
+set_property(
+    TARGET
+    MathFunctions
+    PROPERTY SOVERSION "1"
+    )
+
 # Install rules
 set(installable_libs MathFunctions tutorial_compiler_flags)
 if(TARGET SqrtLibrary)
